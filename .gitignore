@@ -1,17 +1,17 @@
-/inventory
+# /inventory
 
 # ignore roles pulled by ansible-galaxy
 /roles/galaxy/*
 !/roles/galaxy/.gitkeep
 
 # ignores vscode file
-.vscode
+#.vscode
 
 # ignores macos files
 .DS_Store
 
-/requirements.yml
-/setup.yml
+#/requirements.yml
+#/setup.yml
 /group_vars/mash_servers
 
 /run/*

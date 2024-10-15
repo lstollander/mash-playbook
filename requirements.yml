@@ -1,4 +1,6 @@
 ---
+- name: deekayen.pgadmin4
+  activation_prefix: pgadmin_
 
 - src: git+https://github.com/mother-of-all-self-hosting/ansible-role-adguard-home.git
   version: v0.107.52-0
