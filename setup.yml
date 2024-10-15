@@ -78,6 +78,8 @@
     # role-specific:postgres_backup
     - role: galaxy/postgres_backup
     # /role-specific:postgres_backup
+    
+    - role: galaxy/deekayen.pgadmin4
 
     # role-specific:mongodb
     - role: galaxy/mongodb

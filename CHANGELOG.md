@@ -1,3 +1,6 @@
+# 2024-10-13
+  add traefik dashboard
+
 # 2024-09-27
 
 ## (BC Break) Postgres, Traefik & Woodpecker CI roles have been relocated and variable names need adjustments

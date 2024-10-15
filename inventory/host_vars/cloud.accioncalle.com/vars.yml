@@ -1,0 +1,57 @@
+---
+mash_playbook_generic_secret_key: PVOKmJepNRvqPrS1GmxJcL9HeUWD1Qpj0acYUsWCry7ITI7bSh8v7AIZuduKNcNY
+traefik_identifier: mash-traefik
+traefik_base_path: "/mash/cloud/traefik"
+traefik_config_log_level: DEBUG
+docker_users: 
+  - "semaphore"
+  - "nextcloud"
+
+mash_playbook_docker_installation_enabled: true
+devture_docker_sdk_for_python_installation_enabled: true
+devture_timesync_installation_enabled: true
+mash_playbook_reverse_proxy_type: playbook-managed-traefik
+traefik_config_certificatesResolvers_acme_email: postmaster@accioncalle.com
+
+########################################################################
+#                                                                      #
+# /Docker                                                              #
+#                                                                      #
+########################################################################
+
+postgres_enabled: true
+postgres_identifier: mash-postgres
+postgres_base_path: "/mash/cloud/{{ postgres_identifier }}"
+postgres_connection_username: "postgres"
+postgres_connection_password: 'PVOKmJepNRvqPrS1GmxJcL9HeUWD1Qpj0acYUsWCry7ITI7bSh8v7AIZuduKNcNY'
+postgres_connection_hostname: "{{ postgres_identifier }}"
+
+redis_enabled: true
+redis_identifier: mash-redis
+#redis_container_redis_bind_port: "127.0.0.1:6379"
+redis_base_path: "/mash/cloud/{{ redis_identifier }}"
+
+nextcloud_enabled: true
+nextcloud_container_labels_traefik_enabled: true
+#nextcloud_identifier: mash-nextcloud
+nextcloud_hostname: 'cloud.accioncalle.com'
+#nextcloud_uid: 'nextcloud'
+#nextcloud_gid: 'nextcloud'
+#nextcloud_base_path: /mash/cloud/{{ nextcloud_hostname }}/nextcloud
+#nextcloud_container_labels_traefik_enabled: true
+#nextcloud_container_http_host_bind_port: "127.0.0.1:4444"
+#nextcloud_redis_hostname: 'mash-redis'
+#nextcloud_database_type: postgres
+#nextcloud_database_hostname: "{{ postgres_identifier }}"
+#nextcloud_database_name: nextcloud
+#nextcloud_database_username: "{{ postgres_connection_username }}" 
+#nextcloud_database_password: "{{ postgres_connection_password }}"
+
+# Collabora Online integration.
+# See the `collabora-online` role.
+#nextcloud_collabora_app_wopi_url: ''
+#nextcloud_collabora_app_wopi_allowlist: '10.0.0.0/8, 172.16.0.0/12, 192.168.0.0/16'
+
+# Redis intergration.
+#nextcloud_redis_hostname: 'mash-redis'
+#nextcloud_redis_port: 6379

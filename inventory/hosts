@@ -17,6 +17,7 @@
 # to the host line below.
 
 [mash_servers]
-mash.net.accioncalle.com ansible_host=46.183.113.115 ansible_ssh_user=root
+# mash.net.accioncalle.com ansible_host=46.183.113.115 ansible_ssh_user=root
+cloud.accioncalle.com ansible_host=46.183.113.149 ansible_ssh_user=root
 
 [mash_servers:vars]
