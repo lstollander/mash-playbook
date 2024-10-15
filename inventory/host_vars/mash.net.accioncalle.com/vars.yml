@@ -1,0 +1,132 @@
+---
+# Put a strong secret below, generated with `pwgen -s 64 1` or in another way
+# Various other secrets will be derived from this secret automatically.
+mash_playbook_generic_secret_key: PVOKmJepNRvqPrS1GmxJcL9HeUWD1Qpj0acYUsWCry7ITI7bSh8v7AIZuduKNcNY
+traefik_identifier: mash-traefik
+traefik_base_path: "/cloud/traefik"
+docker_users: 
+  - "semaphore"
+
+# To disable Docker installation (in case you'd be installing Docker in another way),
+# remove the line below.
+mash_playbook_docker_installation_enabled: true
+
+# To disable Docker SDK for Python installation (in case you'd be installing the SDK in another way),
+# remove the line below.
+devture_docker_sdk_for_python_installation_enabled: true
+
+########################################################################
+#                                                                      #
+# /Docker                                                              #
+#                                                                      #
+########################################################################
+
+
+
+########################################################################
+#                                                                      #
+# com.devture.ansible.role.timesync                                    #
+#                                                                      #
+########################################################################
+
+# To ensure the server's clock is synchronized (using systemd-timesyncd/ntpd),
+# we enable the timesync service.
+
+devture_timesync_installation_enabled: true
+
+########################################################################
+#                                                                      #
+# /com.devture.ansible.role.timesync                                   #
+#                                                                      #
+########################################################################
+
+
+
+########################################################################
+#                                                                      #
+# traefik                                                              #
+#                                                                      #
+########################################################################
+
+# Most services require a reverse-proxy, so we enable Traefik here.
+#
+# Learn more about the Traefik service in docs/services/traefik.md
+#
+# If your server already runs Traefik, you will run into port conflicts by installing it twice.
+# See docs/interoperability.md for solutions.
+
+mash_playbook_reverse_proxy_type: playbook-managed-traefik
+
+# The email address that Traefik will pass to Let's Encrypt when obtaining SSL certificates
+traefik_config_certificatesResolvers_acme_email: postmaster@accioncalle.com
+
+########################################################################
+#                                                                      #
+# /traefik                                                             #
+#                                                                      #
+########################################################################
+
+
+
+########################################################################
+#                                                                      #
+# postgres                                                             #
+#                                                                      #
+########################################################################
+
+postgis_enabled: true
+postgis_identifier: mash-postgis
+postgis_base_path: "/cloud/{{ postgis_identifier }}"
+postgis_connection_password: 'PVOKmJepNRvqPrS1GmxJcL9HeUWD1Qpj0acYUsWCry7ITI7bSh8v7AIZuduKNcNY'
+postgis_connection_hostname: "{{ postgis_identifier }}"
+postgis_connection_port: 5432
+postgis_connection_username: "root"
+
+# Most services require a Postgres database, so we enable Postgres here.
+#
+# Learn more about the Postgres service in docs/services/postgres.md
+
+postgres_enabled: false
+
+# Put a strong password below, generated with `pwgen -s 64 1` or in another way
+postgres_connection_password: 'PVOKmJepNRvqPrS1GmxJcL9HeUWD1Qpj0acYUsWCry7ITI7bSh8v7AIZuduKNcNY'
+
+########################################################################
+#                                                                      #
+# /postgres                                                            #
+#                                                                      #
+########################################################################
+
+
+
+########################################################################
+#                                                                      #
+# exim_relay                                                           #
+#                                                                      #
+########################################################################
+
+# Various services need to send out email.
+#
+# Enabling this Exim relay SMTP mailer service automatically wires
+# all other services to send email through it.
+#
+# exim-relay then gives you a centralized place for configuring email-sending.
+
+exim_relay_enabled: false
+
+exim_relay_hostname: mash.example.com
+
+exim_relay_sender_address: "someone@{{ exim_relay_hostname }}"
+
+# By default, exim-relay attempts to deliver emails directly.
+# To make it relay via an external SMTP server, see docs/services/exim-relay.md
+
+########################################################################
+#                                                                      #
+# /exim_relay                                                          #
+#                                                                      #
+########################################################################
+
+
+# You can add additional services here, as you see fit.
+# To discover new services and configuration, see docs/supported-services.md
